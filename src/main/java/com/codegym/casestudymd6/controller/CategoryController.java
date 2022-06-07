@@ -18,27 +18,18 @@ public class CategoryController {
     private ICategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<Iterable<Category>> findAllCate() {
+    public ResponseEntity<Iterable<Category>> findAllCategory() {
         Iterable<Category> categories = categoryService.findAll();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Category> findCateById(@PathVariable Long id) {
-        Optional<Category> categoryOptional = categoryService.findById(id);
-        if (!categoryOptional.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(categoryOptional.get(), HttpStatus.OK);
-    }
-
     @PostMapping
-    public ResponseEntity<Category> saveCate(@RequestBody Category category) {
+    public ResponseEntity<Category> saveCategory(@RequestBody Category category) {
         return new ResponseEntity<>(categoryService.save(category), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCate(@PathVariable Long id, @RequestBody Category newCate) {
+    public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category newCate) {
         Optional<Category> categoryOptional = categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -48,12 +39,22 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Category> deleteCate(@PathVariable Long id) {
+    public ResponseEntity<Category> deleteCategory(@PathVariable Long id) {
         Optional<Category> categoryOptional = categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         categoryService.remove(id);
+        return new ResponseEntity<>(categoryOptional.get(), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Category> findCategoryById(@PathVariable Long id) {
+        Optional<Category> categoryOptional = categoryService.findById(id);
+        if (!categoryOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(categoryOptional.get(), HttpStatus.OK);
     }
 }
