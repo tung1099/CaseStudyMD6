@@ -19,6 +19,34 @@ public class Transaction {
     @ManyToOne
     private Category category;
 
+    @ManyToOne
+    private Wallet wallet;
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public Transaction(long id, String amount, String note, Date date, Category category, Wallet wallet) {
+        this.id = id;
+        this.amount = amount;
+        this.note = note;
+        this.date = date;
+        this.category = category;
+        this.wallet = wallet;
+    }
+
+    public Transaction(String amount, String note, Date date, Category category, Wallet wallet) {
+        this.amount = amount;
+        this.note = note;
+        this.date = date;
+        this.category = category;
+        this.wallet = wallet;
+    }
+
     public Transaction() {
     }
 

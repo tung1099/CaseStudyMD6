@@ -22,32 +22,27 @@ public class Wallet {
     private Currency currency;
 
     @ManyToOne
-    private Category category;
-
-    @ManyToOne
     private User user;
 
     public Wallet() {
     }
 
-    public Wallet(long id, String name, double amount, Date date, String note, Currency currency, Category category, User user) {
+    public Wallet(long id, String name, double amount, Date date, String note, Currency currency, User user) {
         this.id = id;
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.note = note;
         this.currency = currency;
-        this.category = category;
         this.user = user;
     }
 
-    public Wallet(String name, double amount, Date date, String note, Currency currency, Category category, User user) {
+    public Wallet(String name, double amount, Date date, String note, Currency currency, User user) {
         this.name = name;
         this.amount = amount;
         this.date = date;
         this.note = note;
         this.currency = currency;
-        this.category = category;
         this.user = user;
     }
 
@@ -97,14 +92,6 @@ public class Wallet {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public User getUser() {
